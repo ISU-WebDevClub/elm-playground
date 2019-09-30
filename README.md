@@ -72,13 +72,14 @@ Can you fix it?
 
 ### Lists
 
-You'll become very familiar with lists after working with functional programming!
+You'll become very familiar with lists after working with functional
+programming! The example [groceries.elm](groceries.elm) contains a few of them.
 
 ```shell
 > pets = ["dog","cat","pig"]
 ["dog","cat","pig"]
 > numbers = [1,2,3]
-[1, 2, 3]
+[1,2,3]
 > increment n = n + 1
 <function>
 > List.map increment numbers
