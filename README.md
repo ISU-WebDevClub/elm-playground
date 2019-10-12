@@ -18,15 +18,15 @@ the imperative family, which is what you may be used to (Java, C, etc.).
 
 Functional programming avoids mutable state, such as a variable whose value can
 change over time. Another key aspect is that functions have no hidden input
-and no hidden output. They do not change variables that exist outside the
-function. For example, if a function takes two inputs, a and b, and returns
-their sum, it meets the criteria. If you put in the same a and b, you always
-get the same output.
+and no hidden output, and they do not change variables that exist outside the
+function. For example, a function might takes two inputs, a and b, and return
+their sum. As long as you provide the same a and b as input, it will always
+return the same sum regardless of what's going on outside the function.
 
 Read this [blog post](http://blog.jenkster.com/2015/12/what-is-functional-programming.html)
 to learn more. It's well written and easy to understand.
 
-## Walkthrough: The Basics
+## Basics
 
 Let's start up the REPL and type some values.
 
@@ -72,8 +72,8 @@ Can you fix it?
 
 ### Lists
 
-You'll become very familiar with lists after working with functional
-programming! The example [groceries.elm](groceries.elm) contains a few of them.
+You'll become familiar with lists after working with functional programming!
+The example [groceries.elm](groceries.elm) contains a few of them.
 
 ```shell
 > pets = ["dog","cat","pig"]
@@ -89,7 +89,8 @@ programming! The example [groceries.elm](groceries.elm) contains a few of them.
 Can you figure out what's going on in `List.map increment numbers`?
 
 One thing to keep in mind is that all items in a list must be of the same type.
-It's not JavaScript!
+It's not like JavaScript, where you can mix together different types in the same
+array.
 
 ### Tuples
 
@@ -103,8 +104,8 @@ error message is quite helpful.
 > moreThanTwo n = if n > 2 then (True, n ++ " is more than two!") else (False, n ++" is not greater than two")
 ```
 
-Try using the hints from the error message to fix the code. Then run the function
-with some inputs to see the output.
+Use the hints from the error message to fix the code. Then run the function with
+some inputs to see the output.
 
 ### Records
 
@@ -130,12 +131,66 @@ What if we need to update one of the values?
     : { color : String, rating : number }
 ```
 
-Now try typing banana. Why is it back to the old value? This is one of the key
-aspects of functional programming: no mutable state.
+Now type `banana`. Why is it back to the old value? This is one of the key
+aspects of functional programming: no mutable state. We returned a new record
+without changing the old one.
 
-## Walkthrough: Making Web Applications with Elm
+## Making Web Applications
 
+Elm is not a general purpose programming language. You will find most useful
+for creating user interfaces in the browser. That being said, there are some
+concepts that are present in all Elm programs. These are the **model**, the
+**update**, and the **view**.
 
+### Summary
+
+- **Model** contains the state of the application.
+- **Update** defines the messages that we receieve from the UI along with the
+  functions that change the model based on the message.
+- **View** is essentially an HTML template.
+- We create the HTML with Elm functions, which allows us to do things like move
+  duplicate code into a separate function. No additional templating language is
+  necessary.
+- Because the view is declarative and abstracted away from normal HTML, Elm can
+  optimize for fast rendering.
+
+### Examples
+
+The examples here will for the most part follow the official guide. The code is
+included in this repo in case the online Elm editor is unavailable, so feel
+free to use the online editor instead running these on your own computer.
+
+#### Counter
+
+After we talk about each example, try adding additional functionality. In
+programming, you learn more by doing rather than looking at examples.
+
+- Online editor: https://elm-lang.org/examples/buttons
+- Code: [examples/counter.elm](examples/counter.elm)
+- **Your turn**: Add a button that resets the counter to zero.
+
+#### Reversing a string as you type
+
+In this example, you will notice some concepts we talked about earlier, such as
+records.
+
+- Online editor: https://elm-lang.org/examples/text-fields
+- Code: [examples/reverse.elm](examples/reverse.elm)
+- **Your turn**: Next to the input, display the length of the string.
+
+#### Form that checks for matching passwords
+
+The view on this one is a little more complex! Can you explain to someone
+sitting next to you exactly what is going on?
+
+- Online editor: https://elm-lang.org/examples/forms
+- Code: [examples/form.elm](examples/form.elm)
+- **Your turn**: Add a button that "submits" the form, adding the name to a list
+  of names below the form.
+- **Bonus points**: Before the password is stored in the model, hash it using the
+  [elm-sha256](https://package.elm-lang.org/packages/billstclair/elm-sha256/latest/)
+  library. This won't work in the online editor, so you'll need to run it on your
+  own computer.
 
 ## Resources
 
