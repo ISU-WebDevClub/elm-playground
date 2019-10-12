@@ -26,16 +26,16 @@ get the same output.
 Read this [blog post](http://blog.jenkster.com/2015/12/what-is-functional-programming.html)
 to learn more. It's well written and easy to understand.
 
-## Walkthrough
+## Walkthrough: The Basics
 
 Let's start up the REPL and type some values.
 
-```
+```shell
 $ elm repl
 > 2 + 2
-4
+4 : number
 > "Zebra"
-"Zebra"
+"Zebra" : String
 ```
 
 What do you think will happen here?
@@ -51,14 +51,14 @@ Let's write a function! Can you figure out how to call it in the REPL?
 
 ```shell
 > greet name = "Hello " ++ name ++ "!"
-<function>
+<function> : String -> String
 ```
 
 We can make it take multiple arguments.
 
 ```shell
 > greet otherName myName = "Hello " ++ otherName ++ "!" ++ " My name is " ++ myName ++ "!"
-<function>
+<function> : String -> String -> String
 ```
 
 All arguments must be primitive values, or else you need to put parenthesis around
@@ -67,7 +67,7 @@ Can you fix it?
 
 ```shell
 > greet "Alice" "Bo" ++ "b"
-"Hello Alice! My name is Bo!b"
+"Hello Alice! My name is Bo!b" : String
 ```
 
 ### Lists
@@ -77,19 +77,65 @@ programming! The example [groceries.elm](groceries.elm) contains a few of them.
 
 ```shell
 > pets = ["dog","cat","pig"]
-["dog","cat","pig"]
+["dog","cat","pig"] : List String
 > numbers = [1,2,3]
-[1,2,3]
+[1,2,3] : List number
 > increment n = n + 1
-<function>
+<function> : number -> number
 > List.map increment numbers
-[2,3,4]
+[2,3,4] : List number
 ```
 
 Can you figure out what's going on in `List.map increment numbers`?
 
 One thing to keep in mind is that all items in a list must be of the same type.
 It's not JavaScript!
+
+### Tuples
+
+When you want to return multiple items from a function, use tuples. The items
+in a tuple can be of different types.
+
+Try the following. It will produce an error. However, you will notice that the
+error message is quite helpful.
+
+```shell
+> moreThanTwo n = if n > 2 then (True, n ++ " is more than two!") else (False, n ++" is not greater than two")
+```
+
+Try using the hints from the error message to fix the code. Then run the function
+with some inputs to see the output.
+
+### Records
+
+Records are like JSON objects. They allow you to create a group of values that
+can be accessed by name.
+
+```shell
+> banana = { color = "yellow", rating = 5 }
+{ color = "yellow", rating = 5 }
+    : { color : String, rating : number }
+> banana.rating
+5 : number
+> .rating banana
+5 : number
+
+```
+
+What if we need to update one of the values?
+
+```shell
+> { banana | rating = 10 }
+{ color = "yellow", rating = 10 }
+    : { color : String, rating : number }
+```
+
+Now try typing banana. Why is it back to the old value? This is one of the key
+aspects of functional programming: no mutable state.
+
+## Walkthrough: Making Web Applications with Elm
+
+
 
 ## Resources
 
